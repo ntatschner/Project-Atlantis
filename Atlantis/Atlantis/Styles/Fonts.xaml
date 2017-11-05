@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Atlantis">
+
+    <!-- Font Resource -->
+    <FontFamily x:Key="LatoRegular">pack://application:,,,/src/Fonts/#Lato Regular</FontFamily>
+    <FontFamily x:Key="LatoThin">pack://application:,,,/src/Fonts/#Lato Thin</FontFamily>
+    <FontFamily x:Key="LatoItalic">pack://application:,,,/src/Fonts/#Lato Italic</FontFamily>
+
+    <Style TargetType="{x:Type Control}" x:Key="BaseStyle" >
+        <Setter Property="FontFamily" Value="{StaticResource LatoThin}"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="TextBlockBaseStyle" >
+        <Setter Property="FontFamily" Value="{StaticResource LatoThin}"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}"/>
+
+    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BaseStyle}"/>
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}"/>
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBaseStyle}"/>
+    <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource BaseStyle}"/>
+
+</ResourceDictionary>

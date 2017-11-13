@@ -7,7 +7,15 @@
         mc:Ignorable="d"
         WindowStyle="None"
         AllowsTransparency="True"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Project Atlantis" Height="350" Width="525">
+
+    <WindowChrome.WindowChrome >
+        <WindowChrome 
+            ResizeBorderThickness="{Binding}"
+            
+            />
+
+    </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>

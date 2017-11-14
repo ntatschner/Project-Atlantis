@@ -45,7 +45,39 @@
                                     <Grid Grid.Column="0" Panel.ZIndex="1">
                                         <Grid.ColumnDefinitions>
                                             <!-- Left Icon-->
+                                            <ColumnDefinition Width="Auto"/>
+                                            <!-- Title -->
+                                            <ColumnDefinition Width="*"/>
+                                            <!-- Profile -->
+                                            <ColumnDefinition Width="Auto"/>
+                                            <!-- Settings -->
+                                            <ColumnDefinition Width="Auto"/>
+                                            <!-- Window Buttons -->
+                                            <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
+                                        
+                                        <!-- Left Icon-->
+                                        <Button Style="{StaticResource SystemIconButton}" Command="{Binding MenuCommand}">
+                                            <Image Source="/src/Icons/033-laptop-1.png"/>
+                                        </Button>
+                                        <!-- Title Text-->
+                                        <Viewbox Grid.Column="1" Margin="0">
+                                            <TextBlock Style="{StaticResource HeaderText}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue='Project Atlantis'}" />
+                                        </Viewbox>
+                                        <!-- Profile Button -->
+                                        <Button Grid.Column="2" Style="{StaticResource HeaderMenuButton}">
+                                            <TextBlock Style="{StaticResource HeaderText}" Text="Profile" />
+                                        </Button>
+                                        <!-- Settings Button -->
+                                        <Button Grid.Column="3" Style="{StaticResource HeaderMenuButton}">
+                                            <TextBlock Style="{StaticResource HeaderText}" Text="Settings" />
+                                        </Button>
+                                        <!-- Window Buttons -->
+                                        <StackPanel Grid.Column="4" Orientation="Horizontal" >
+                                            <Button Style="{StaticResource WindowControlButton}" Content="_" />
+                                            <Button Style="{StaticResource WindowControlButton}" Content="[ ]" />
+                                            <Button Style="{StaticResource WindowControlButton}" Content="X" />
+                                        </StackPanel>
                                         
                                     </Grid>
                                     

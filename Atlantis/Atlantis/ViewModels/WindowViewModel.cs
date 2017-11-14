@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Atlantis
 {
@@ -91,6 +93,27 @@ namespace Atlantis
 
         #endregion
 
+        #region Commands 
+
+        /// <summary>
+        /// The command to Minimize the window
+        /// </summary>
+        public ICommand MinimizeCommand { get; set; }
+        /// <summary>
+        /// The command to Maximize the window
+        /// </summary>
+        public ICommand MaximizeCommand { get; set; }
+        /// <summary>
+        /// The command to CLose the window
+        /// </summary>
+        public ICommand CloseCommand { get; set; }
+        /// <summary>
+        /// The command to Menu the window
+        /// </summary>
+        public ICommand MenuCommand { get; set; }
+
+        #endregion
+
         #region Constructor
         /// <summary>
         /// Default Constructor
@@ -109,8 +132,33 @@ namespace Atlantis
                 OnPropertyChanged(nameof(WindowRadius));
                 OnPropertyChanged(nameof(WindowCornerRadius));
             };
+
+            // Create Commands
+
+            MinimizeCommand = new RelayCommand(() => mWindow.WindowState = WindowState.Minimized);
+            MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
+            CloseCommand = new RelayCommand(() => mWindow.Close());
+            MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetMousePosition()));
         }
 
         #endregion
+
+        #region Private Helpers
+
+        /// <summary>
+        /// Gets the current mouse position on the screen
+        /// </summary>
+        /// <returns></returns>
+        private Point GetMousePosition()
+        {
+            // Position of the mouse relitive to the window
+            var position = Mouse.GetPosition(mWindow);
+            // Add the windows position so its a "ToScreen"
+            return new Point(position.X + mWindow.Left, position.Y + mWindow.Top);
+        }
+
+        #endregion
+
+
     }
 }

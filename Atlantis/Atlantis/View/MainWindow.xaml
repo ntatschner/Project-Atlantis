@@ -8,6 +8,8 @@
         WindowStyle="None"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
+        MinWidth="{Binding WindowMinimumWidth}"
+        MinHeight="{Binding WindowMinimumHeight}"
         Title="Project Atlantis" Height="600" Width="900">
 
     <Window.Resources>
@@ -21,6 +23,11 @@
                             <!-- Main Windows outline -->
                             <Grid>
                                 
+                                <!-- Opacity mask for corners on grid -->
+                                <Border x:Name="Container"
+                                        Background="{StaticResource BackgroundVeryLightBrushBlue}"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=5}" />
+
                                 <!-- Main window and drop shadow-->
                                 <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=5}"
                                         Background="{Binding ForegroundMainLight, FallbackValue=White}">
@@ -31,6 +38,11 @@
                                     
                                 <!-- The main window content -->
                                 <Grid >
+                                    <!-- Corner Clipping -->
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Container}" />
+                                    </Grid.OpacityMask>
+                                    
                                     <Grid.RowDefinitions>
                                         
                                         <!-- Title Bar-->
@@ -64,23 +76,52 @@
                                         <Viewbox Grid.Column="1" Margin="0">
                                             <TextBlock Style="{StaticResource HeaderText}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue='Project Atlantis'}" />
                                         </Viewbox>
-                                        <!-- Profile Button -->
-                                        <Button Grid.Column="2" Style="{StaticResource HeaderMenuButton}">
-                                            <TextBlock Style="{StaticResource HeaderText}" Text="Profile" />
-                                        </Button>
-                                        <!-- Settings Button -->
-                                        <Button Grid.Column="3" Style="{StaticResource HeaderMenuButton}">
-                                            <TextBlock Style="{StaticResource HeaderText}" Text="Settings" />
-                                        </Button>
+                                        <Viewbox Grid.Column="2" Margin="0">
+                                            <!-- Profile Button -->
+                                            <Button  Style="{StaticResource TitleButton}">
+                                                <TextBlock Style="{StaticResource TitleButtonTextBlock}" Text="Profile" />
+                                            </Button>
+                                        </Viewbox>
+                                        <Viewbox Grid.Column="3">
+                                            <!-- Settings Button -->
+                                            <Button  Style="{StaticResource TitleButton}">
+                                                <TextBlock Style="{StaticResource TitleButtonTextBlock}" Text="Settings" />
+                                            </Button>
+                                        </Viewbox>
                                         <!-- Window Buttons -->
                                         <StackPanel Grid.Column="4" Orientation="Horizontal" >
-                                            <Button Style="{StaticResource WindowControlButton}" Content="_" />
-                                            <Button Style="{StaticResource WindowControlButton}" Content="[ ]" />
-                                            <Button Style="{StaticResource WindowControlButton}" Content="X" />
+                                            <Button Command="{Binding MinimizeCommand}" Style="{StaticResource WindowControlButton}" Content="_" />
+                                            <Button Command="{Binding MaximizeCommand}" Style="{StaticResource WindowControlButton}" Content="[ ]" />
+                                            <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowCloseButton}" Content="X" />
                                         </StackPanel>
                                         
                                     </Grid>
+                                    <!-- Drop Shadow -->
+
+                                    <Border Grid.Row="1" Height="6" BorderThickness="0 0.2 0 0">
+                                        <!-- Underline -->
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="{StaticResource ForegroundMainLight}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource ForegroundMain}" Offset="0.5" />
+                                                <GradientStop Color="{StaticResource ForegroundMainLight}" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                        
+                                        <!-- Drop shadow-->
+                                        <Border.Background >
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="{StaticResource BackgroundVeryLight}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource ForegroundMainLight}" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
                                     
+                                    <!-- Page Content -->
+
+                                    <Border Grid.Row="2" Padding="{Binding InnerContentPadding}">
+                                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                                    </Border>
                                 </Grid>
 
                             </Grid>
@@ -99,6 +140,6 @@
             />
     </WindowChrome.WindowChrome>
     <Grid>
-
+        <Frame x:Name="MainFrame" Content="{Binding CurrentPage}" />
     </Grid>
 </Window>

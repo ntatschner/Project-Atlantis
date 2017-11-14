@@ -2,11 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Atlantis">
 
-    <Color x:Key="BackgroundLight">#ccfaff</Color>
-    <SolidColorBrush x:Key="BackgroundLightBrush" Color="{StaticResource BackgroundLight}"/>
+    <Color x:Key="BackgroundLight">#C7EEFF</Color>
+    <SolidColorBrush x:Key="BackgroundLightBrushBlue" Color="{StaticResource BackgroundLight}"/>
 
-    <Color x:Key="BackgroundVeryLight">#e1fcff</Color>
-    <SolidColorBrush x:Key="BackgroundVeryLightBrush" Color="{StaticResource BackgroundVeryLight}"/>
+    <Color x:Key="BackgroundVeryLight">#E4F7FF</Color>
+    <SolidColorBrush x:Key="BackgroundVeryLightBrushBlue" Color="{StaticResource BackgroundVeryLight}"/>
 
     <Color x:Key="ForegroundMain">#737373</Color>
     <SolidColorBrush x:Key="ForegroundMainBrush" Color="{StaticResource ForegroundMain}"/>
@@ -16,5 +16,14 @@
 
     <Color x:Key="ForegroundMainLight">#ffffff</Color>
     <SolidColorBrush x:Key="ForegroundMainLightBrush" Color="{StaticResource ForegroundMainLight}"/>
+
+    <Color x:Key="PinkTriadic1">#BE5C7B</Color>
+    <SolidColorBrush x:Key="PinkTriadic1Brush" Color="{StaticResource PinkTriadic1}"/>
+
+    <Color x:Key="GreenTriadic1">#7BBE5C</Color>
+    <SolidColorBrush x:Key="GreenTriadic1Brush" Color="{StaticResource GreenTriadic1}"/>
+
+    <Color x:Key="BlueTriadic1">#5C7BBE</Color>
+    <SolidColorBrush x:Key="BlueTriadic1Brush" Color="{StaticResource BlueTriadic1}"/>
 
 </ResourceDictionary>

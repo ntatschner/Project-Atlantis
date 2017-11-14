@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Atlantis.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -35,6 +36,16 @@ namespace Atlantis
         #region Public Properties
 
         /// <summary>
+        /// The Minimum Width the window can go
+        /// </summary>
+        public double WindowMinimumWidth { get; set; } = 500;
+
+        /// <summary>
+        /// The Minimum Height the window can go
+        /// </summary>
+        public double WindowMinimumHeight { get; set; } = 400;
+
+        /// <summary>
         /// This is the size of the border around the edges of the main window
         /// </summary>
         public int ResizeBorder { get; set; } = 3;
@@ -43,6 +54,11 @@ namespace Atlantis
         /// The Size of the resize border around the window, taking into account the outermargin
         /// </summary>
         public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder + OuterMarginSize); } }
+
+        /// <summary>
+        /// The Size of the resize border around the window, taking into account the outermargin
+        /// </summary>
+        public Thickness InnerContentPadding { get { return new Thickness(ResizeBorder); } }
 
         /// <summary>
         /// The outer margin size of the window to allow for a drop shadow
@@ -91,7 +107,13 @@ namespace Atlantis
 
         public GridLength TitleHeightGridLength { get { return new GridLength(TitleHeight + ResizeBorder); } }
 
+        /// <summary>
+        /// The current page of the application
+        /// </summary>
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Setup;
+
         #endregion
+
 
         #region Commands 
 
@@ -139,6 +161,9 @@ namespace Atlantis
             MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
             CloseCommand = new RelayCommand(() => mWindow.Close());
             MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetMousePosition()));
+
+            // Fix Window resize issue
+            var resizer = new WindowResizer(mWindow);
         }
 
         #endregion

@@ -31,6 +31,11 @@ namespace Atlantis
         /// </summary>
         private int mWindowRadius = 5;
 
+        /// <summary>
+        /// The last known dock position
+        /// </summary>
+        private WindowDockPosition mDockPosition = WindowDockPosition.Undocked;
+
         #endregion
 
         #region Public Properties
@@ -46,9 +51,14 @@ namespace Atlantis
         public double WindowMinimumHeight { get; set; } = 400;
 
         /// <summary>
-        /// This is the size of the border around the edges of the main window
+        /// True if the window should be borderless because it is docked or maximized
         /// </summary>
-        public int ResizeBorder { get; set; } = 3;
+        public bool Borderless => (mWindow.WindowState == WindowState.Maximized || mDockPosition != WindowDockPosition.Undocked);
+
+        /// <summary>
+        /// The size of the resize border around the window
+        /// </summary>
+        public int ResizeBorder => mWindow.WindowState == WindowState.Maximized ? 0 : 4;
 
         /// <summary>
         /// The Size of the resize border around the window, taking into account the outermargin

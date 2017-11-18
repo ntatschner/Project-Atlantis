@@ -22,7 +22,7 @@ namespace Atlantis
     {
         public SetupPage()
         {
-            InitializeComponent();
+           // InitializeComponent();
         }
     }
 }

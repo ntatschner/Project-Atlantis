@@ -73,7 +73,7 @@
                                             <Image Source="/src/Icons/033-laptop-1.png"/>
                                         </Button>
                                         <!-- Title Text-->
-                                        <Viewbox Grid.Column="1" Margin="0">
+                                        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="0">
                                             <TextBlock Style="{StaticResource HeaderText}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue='Project Atlantis'}" />
                                         </Viewbox>
                                         <Viewbox Grid.Column="2" Margin="0">
